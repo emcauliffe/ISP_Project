@@ -5,6 +5,6 @@ void setup () {
 }
 
 void draw () {
-  //char c1 = (int(encode.charAt(0));
-  
+  int c1 = int(encode[0].charAt(0));
+  println(c1);
 }
