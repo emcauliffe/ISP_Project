@@ -27,5 +27,7 @@ void draw () {
   ec2 = ec2 + eshift;
   println((char)ec2);
   
+  text(((char) ec1), 20, 20);
+  
   noLoop();
 }
