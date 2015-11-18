@@ -4,6 +4,7 @@ int shift2; //encode shift two
 int eshift; //the integer for how much the numbers should shift to encode the message
 int ec1; //encode character one
 int ec2; //encode character two
+int el; //length of mesage to be encoded
 
 void setup () {
   encode = loadStrings("encode.txt"); // load the text that is to be encoded as an array
@@ -26,6 +27,8 @@ void draw () {
   ec2 = int(encode[1].charAt(1));
   ec2 = ec2 + eshift;
   println((char)ec2);
+  el = encode[1].length();
+  println(el);
   
   text(((char) ec1), 20, 20);
   
