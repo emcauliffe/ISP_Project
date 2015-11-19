@@ -28,7 +28,7 @@ void draw() {
     fill(0);
     textSize(12);
     textAlign(LEFT);
-    text(e1.encmsg(), 10, 20, 980, 470);
+    text(e1.encmsg(), 10, 150, 980, 738);
     noLoop();
   }
   if (code==2) {
@@ -38,7 +38,7 @@ void draw() {
     fill(0);
     textSize(12);
     textAlign(LEFT);
-    text(d1.decmsg(), 10, 470, 980, 738);
+    text(d1.decmsg(), 10, 150, 980, 738);
     noLoop();
   }
 }
