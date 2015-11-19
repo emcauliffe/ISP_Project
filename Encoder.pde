@@ -9,7 +9,7 @@ class Encoder {
   String encoded;//encoded message
   String[] encode;//encode array
   Encoder() {
-    encode = loadStrings("encode.txt");// load the text that is to be encoded as an array;
+    encode=loadStrings("encode.txt");// load the text that is to be encoded as an array;
   }
   void update() {
     shift1=(int(encode[0].charAt(0)));
@@ -19,15 +19,14 @@ class Encoder {
     for (charnum=0; charnum<el; charnum=charnum+1) {
       ec=int(encode[1].charAt(charnum));
       ec=ec+eshift;
-      //print((char)ec);
       if (charnum==0) {
-        encoded = ((char)ec)+"";
+        encoded=((char)ec)+"";
       } else {
-        encoded += ((char)ec);
+        encoded+=((char)ec);
       }
     }
   }
   String encmsg() {
-    return (encoded);
+    return(encoded);
   }
 }
