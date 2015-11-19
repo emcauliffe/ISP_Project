@@ -6,8 +6,11 @@ int ec;//encode character one
 int ec2;//encode character two
 int el;//length of mesage to be encoded
 int charnum;//the placement number of the character in the message to be encoded
+String encmsg;//encoded message
 void setup() {
   encode=loadStrings("encode.txt");// load the text that is to be encoded as an array
+  size(1000, 100);
+  background(255);
 }
 void draw() {
   shift1=(int(encode[0].charAt(0)));
@@ -17,7 +20,15 @@ void draw() {
   for (charnum=0; charnum<el; charnum=charnum+1) {
     ec=int(encode[1].charAt(charnum));
     ec=ec+eshift;
-    print((char)ec);
+    //print((char)ec);
+    if (charnum==0) {
+      encmsg = ((char)ec)+"";
+    } else {
+      encmsg += ((char)ec);
+    }
   }
+  print(encmsg);
+  fill(0);
+  text(encmsg, 20, 20);
   noLoop();
 }
