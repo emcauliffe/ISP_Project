@@ -19,6 +19,7 @@ class Decoder {
     for (charnum=0; charnum<el; charnum=charnum+1) {
       ec=int(decode[1].charAt(charnum));
       ec=ec+eshift;
+      println((charnum/el)*100);
       if (charnum==0) {
         decoded=((char)ec)+"";
       } else {
@@ -27,6 +28,10 @@ class Decoder {
     }
   }
   String decmsg() {
-    return(decoded);
+    if (el==0) {
+      return("ATTENTION: THERE IS NO MESSAGE TO BE DECRYPTED! PLEASE OPEN \"decode.txt\" AND FOLLOW THE INSTRUCTIONS!");
+    } else {
+      return(decoded);
+    }
   }
 }

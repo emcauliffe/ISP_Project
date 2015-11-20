@@ -1,16 +1,16 @@
 Encoder e1;//encoder class
 Decoder d1;//decoder class
 int code;//0 for load screen, 1 for encode, 2 for decode
+int i1;
 void setup() {
   size(1000, 748);
   background(255);
   e1=new Encoder();
   d1=new Decoder();
+  frameRate(6000);
   code=0;
 }
 void draw() {
-  e1.update();
-  d1.update();
   if (code==0) {
     background(255);
     textSize(100);
@@ -22,21 +22,32 @@ void draw() {
     text("Press \"D\" to encrypt text in decode.txt", 748, 534);
   }
   if (code==1) {
+    e1.update();
     background(255);
     println("");
     print(e1.encmsg());
-    fill(0);
-    textSize(12);
+    if (e1.encmsg() == "ATTENTION: THERE IS NO MESSAGE TO BE ENCRYPTED! PLEASE OPEN \"encode.txt\" AND FOLLOW THE INSTRUCTIONS!") {
+      fill(250, 0, 0);
+    } else {
+      fill(0);
+    }
+    textSize(15);
     textAlign(LEFT);
     text(e1.encmsg(), 10, 150, 980, 738);
     noLoop();
   }
   if (code==2) {
     background(255);
+    d1.update();
+    background(255);
     println("");
     print(d1.decmsg());
-    fill(0);
-    textSize(12);
+    if (d1.decmsg() == "ATTENTION: THERE IS NO MESSAGE TO BE DECRYPTED! PLEASE OPEN \"decode.txt\" AND FOLLOW THE INSTRUCTIONS!") {
+      fill(250, 0, 0);
+    } else {
+      fill(0);
+    }
+    textSize(15);
     textAlign(LEFT);
     text(d1.decmsg(), 10, 150, 980, 738);
     noLoop();
