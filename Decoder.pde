@@ -17,6 +17,7 @@ class Decoder {
     shift2=(int(decode[0].charAt(1)));
     dshift=shift1-shift2;//Calculates the shift required in the numbers to decode the text and prints the math for it^^
     dl=decode[1].length();//calculates the length of the message to be decoded
+    noStroke();
   }
   void update() {
 
@@ -40,20 +41,20 @@ class Decoder {
         outputdecoded.close();
         noLoop();
       } else {
-        for (charperframe=0; charperframe<1; charperframe++) {
-          dc=int(decode[1].charAt(charnum));//converts every character to ASCII
-          dc=dc+dshift;//shifts the ASCII code of each character in the message by eshift 
-          completion=((charnum/dl)*100);//calculates how far the throuugh the 
-          fill(0);
-          rect(100, 364, (completion*8), 10);
-          println(completion);
-          if (charnum==0) {
-            decoded=((char)dc)+"";
-          } else {
-            decoded+=((char)dc);
-          }
-          charnum=charnum+1; //moves to next character
+        fill(255);
+        rect(463, 405, 53, 26);
+        dc=int(decode[1].charAt(charnum));//converts every character to ASCII
+        dc=dc+dshift;//shifts the ASCII code of each character in the message by eshift 
+        completion=((charnum/dl)*100);//calculates how far the throuugh the 
+        rect(100, 364, (completion*8), 10);
+        text(round(completion)+"%", 490, 423);
+        //println(completion);
+        if (charnum==0) {
+          decoded=((char)dc)+"";
+        } else {
+          decoded+=((char)dc);
         }
+        charnum++; //moves to next character
       }
     }
   }

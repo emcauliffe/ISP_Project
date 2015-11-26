@@ -18,6 +18,7 @@ class Encoder {
     shift2=(int(encode[0].charAt(1)));//convert the second character in the key to ASCII
     eshift=shift2-shift1;//Subtracts the ASCII of the first number from the second number. This calculates the shift required in the cypher
     el=encode[1].length();//calculates the length of the message to be encoded
+    noStroke();
   }
 
   void update() {
@@ -42,20 +43,21 @@ class Encoder {
         outputencoded.close();
         noLoop();
       } else {
-        for (charperframe=0; charperframe<1; charperframe++) {
-          ec=int(encode[1].charAt(charnum));//converts every character to ASCII
-          ec=ec+eshift;//shifts the ASCII code of each character in the message by eshift 
-          completion=((charnum/el)*100);//calculates how far the throuugh the 
-          fill(0);
-          rect(100, 364, (completion*8), 10);
-          println(completion);
-          if (charnum==0) {
-            encoded=((char)ec)+"";
-          } else {
-            encoded+=((char)ec);
-          }
-          charnum=charnum+1; //moves to next character
+        fill(255);
+        rect(463, 405, 53, 26);
+        ec=int(encode[1].charAt(charnum));//converts every character to ASCII
+        ec=ec+eshift;//shifts the ASCII code of each character in the message by eshift 
+        completion=((charnum/el)*100);//calculates how far the throuugh the
+        fill(0);
+        rect(100, 364, (completion*8), 10);
+        text(round(completion)+"%", 490, 423);
+        //println(completion);
+        if (charnum==0) {
+          encoded=((char)ec)+"";
+        } else {
+          encoded+=((char)ec);
         }
+        charnum++; //moves to next character
       }
     }
   }

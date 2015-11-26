@@ -33,7 +33,7 @@ void draw() {
     rect(100, 364, 800, 10);
     noStroke();
     fill(0);
-    text("loading", 490, 394);//print loading on screen
+    text("Loading...", 490, 394);//print loading on screen
     e1.update();
   }
   //decode
@@ -44,7 +44,7 @@ void draw() {
     rect(100, 364, 800, 10);
     noStroke();
     fill(0);
-    text("loading", 490, 394);//print loading on screen
+    text("Loading...", 490, 394);//print loading on screen
     d1.update();
   }
 }
@@ -65,8 +65,10 @@ void keyPressed() {
 void mousePressed() {
   if (mouseX>25 && mouseX<481 && mouseY>512 && mouseY<542) {
     code=1;
+    loop();
   }
   if (mouseX>521 && mouseX<977 && mouseY>512 && mouseY<542) {
     code=2;
+    loop();
   }
 }
