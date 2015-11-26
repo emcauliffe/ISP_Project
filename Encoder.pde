@@ -10,7 +10,6 @@ class Encoder {
   PrintWriter outputencoded;//output the encoded text to decode.txt
   int charnum;//current character being encoded
   int charperframe;//the amount of characters to be encoded per refresh of the screen
-
   Encoder() {
     encode=loadStrings("Input/encode.txt");// load the text that is to be encoded as an array;
     outputencoded=createWriter("Output/encode.txt");
@@ -20,40 +19,40 @@ class Encoder {
     el=encode[1].length();//calculates the length of the message to be encoded
     noStroke();
   }
-
   void update() {
-
-    if (el==0) {
+    if (el==0) {//if there is nothing to be encoded alert the user
       background(255);
       fill(250, 0, 0);
       text("ATTENTION: THERE IS NO MESSAGE TO BE ENCRYPTED! PLEASE OPEN \"Input/encode.txt\" AND FOLLOW THE INSTRUCTIONS!", 12, 291, 980, 738);
     } else {
-      if (charnum==el) {
+      if (charnum==el) {//if the program is fully encrypted, do this:
         background(255);
-        println("");
-        print(encoded);
+        //println("");
+        //print(encoded);
         textSize(15);
         textAlign(CENTER);
-        text("Encoded text is also avaliable in line 8 of \"Output/encode.txt\". Press \"R\" to return", 400, 15);
+        text("Encoded text is also avaliable in \"Output/encode.txt\". Press \"R\" to return.", 400, 15);//tell the user where to find the text output so they can copy it to the clipboard
         textAlign(LEFT);
         fill(0);
-        text(encoded, 10, 50, 980, 738);
-        outputencoded.print(encoded);
+        text(encoded, 10, 50, 980, 738);//display the decoded message on the screen
+        outputencoded.print(encoded);//print the decoded message to the output/decoded.txt file and close it
         outputencoded.flush();
         outputencoded.close();
         noLoop();
-      } else {
+      } else {//if it is not complete, do this:
         fill(255);
-        rect(463, 405, 53, 26);
+        rect(463, 405, 53, 26);//erase the loading percentage so that we can draw over it again
         ec=int(encode[1].charAt(charnum));//converts every character to ASCII
-        ec=ec+eshift;//shifts the ASCII code of each character in the message by eshift 
+        if (ec!=32) {//if the character is not a space, then encrypt the character
+          ec=ec+eshift;//shifts the ASCII code of each character in the message by eshift
+        }
         completion=((charnum/el)*100);//calculates how far the throuugh the
         fill(0);
-        rect(100, 364, (completion*8), 10);
-        text(round(completion)+"%", 490, 423);
+        rect(100, 364, (completion*8), 10);//draw the loading progress rectangle
+        text(round(completion)+"%", 490, 423);//display the loading percentage on screen and round it to the nearest percentage
         //println(completion);
         if (charnum==0) {
-          encoded=((char)ec)+"";
+          encoded=((char)ec)+"";//print nothing instead of "null" character on the first operation
         } else {
           encoded+=((char)ec);
         }

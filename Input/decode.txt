@@ -1,4 +1,4 @@
-AC<---Please place the desired key for your encrypted code here [in place of the example already written]
-
+AG<---Please place the desired key for your encrypted code here [in place of the example already written]
+789:;<=>?6'42E‣@Aace1./0,+*)FdGHIJKLMNOP     QRSTUVWXYZ[`]^_`ghijklmnopqrstuvwxyz{|}~BDf
 ^^^^^^Please place code that you wish to be decrypted above this text. Any text inputted below or at this line will not be decrypted.^^^^^^
 Also, please do not press enter when inputting your message as any text below the second line (after hitting enter) will not be encrypted.

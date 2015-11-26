@@ -3,7 +3,7 @@ class Decoder {
   int shift2;//decode shift two
   int dshift;//the integer for how much the numbers should shift to decode the message
   int dc;//decode character one
-  int dl;//length of mesage to be decoded
+  float dl;//length of mesage to be decoded
   int charnum;//the placement number of the character in the message to be decoded
   String decoded;//decoded message
   String[] decode;//decode array
@@ -12,45 +12,47 @@ class Decoder {
   int charperframe;//the amount of characters to be encoded per refresh of the screen
   Decoder() {
     decode=loadStrings("Input/decode.txt");// load the text that is to be decoded as an array;
-    outputdecoded=createWriter("Output/decode.txt");
-    shift1=(int(decode[0].charAt(0)));
-    shift2=(int(decode[0].charAt(1)));
-    dshift=shift1-shift2;//Calculates the shift required in the numbers to decode the text and prints the math for it^^
+    outputdecoded=createWriter("Output/decode.txt");//open the file that the decrypted text will be written to 
+    shift1=(int(decode[0].charAt(0)));//convert the first character of the key to ASCII
+    shift2=(int(decode[0].charAt(1)));//convert the second character of the key to ASCII
+    dshift=shift1-shift2;//Calculates the shift required in the numbers to decode the text
     dl=decode[1].length();//calculates the length of the message to be decoded
     noStroke();
   }
   void update() {
-
-    if (dl==0) {
+    if (dl==0) {//if there is nothing to be decoded alert the user
       background(255);
       fill(250, 0, 0);
       text("ATTENTION: THERE IS NO MESSAGE TO BE DECRYPTED! PLEASE OPEN \"Input/decode.txt\" AND FOLLOW THE INSTRUCTIONS!", 12, 291, 980, 738);
     } else {
-      if (charnum==dl) {
+      if (charnum==dl) {//if the program is fully decrypted, do this:
         background(255);
-        println("");
-        print(decoded);
+        //println("");
+        //print(decoded);
         textSize(15);
         textAlign(CENTER);
-        text("Encoded text is also avaliable in line 8 of \"Output/encode.txt\". Press \"R\" to return", 400, 15);
+        text("Encoded text is also avaliable in \"Output/encode.txt\". Press \"R\" to return.", 400, 15); //tell the user where to find the text output so they can copy it to the clipboard
         textAlign(LEFT);
         fill(0);
-        text(decoded, 10, 50, 980, 738);
-        outputdecoded.print(decoded);
-        outputdecoded.flush();
-        outputdecoded.close();
-        noLoop();
-      } else {
+        text(decoded, 10, 50, 980, 738);//display the decoded message on the screen
+        outputdecoded.print(decoded);//print the decoded message to the output/decoded.txt file 
+        outputdecoded.flush();//ensure all data needed is written to the file
+        outputdecoded.close();//close the output file
+        noLoop();//end the loop
+      } else {//if it is not complete, do this:
         fill(255);
-        rect(463, 405, 53, 26);
+        rect(463, 405, 53, 26);//erase the loading percentage so that we can draw over it again
         dc=int(decode[1].charAt(charnum));//converts every character to ASCII
-        dc=dc+dshift;//shifts the ASCII code of each character in the message by eshift 
-        completion=((charnum/dl)*100);//calculates how far the throuugh the 
-        rect(100, 364, (completion*8), 10);
-        text(round(completion)+"%", 490, 423);
+        if (dc!=32) {//if the character is not a space, shift the ASCII codes to decrypt the message
+          dc=dc+dshift;//shifts the ASCII code of each character in the message by eshift
+        }
+        completion=((charnum/dl)*100);//calculates how far the through the operation the program is
+        fill(0);//fill to black
+        rect(100, 364, (completion*8), 10);//draw the loading progress rectangle
+        text(round(completion)+"%", 490, 423);//display the loading percentage on screen and round it to the nearest percentage
         //println(completion);
         if (charnum==0) {
-          decoded=((char)dc)+"";
+          decoded=((char)dc)+"";//print nothing instead of "null" character on the first operation
         } else {
           decoded+=((char)dc);
         }
