@@ -1,10 +1,9 @@
 class Decoder {
   int shift1;//decode shift one
   int shift2;//decode shift two
-  int eshift;//the integer for how much the numbers should shift to decode the message
-  int ec;//decode character one
-  int ec2;//decode character two
-  int el;//length of mesage to be decoded
+  int dshift;//the integer for how much the numbers should shift to decode the message
+  int dc;//decode character one
+  int dl;//length of mesage to be decoded
   int charnum;//the placement number of the character in the message to be decoded
   String decoded;//decoded message
   String[] decode;//decode array
@@ -16,48 +15,45 @@ class Decoder {
     outputdecoded=createWriter("Output/decode.txt");
     shift1=(int(decode[0].charAt(0)));
     shift2=(int(decode[0].charAt(1)));
-    eshift=shift1-shift2;//Calculates the shift required in the numbers to decode the text and prints the math for it^^
-    el=decode[1].length();//calculates the length of the message to be decoded
+    dshift=shift1-shift2;//Calculates the shift required in the numbers to decode the text and prints the math for it^^
+    dl=decode[1].length();//calculates the length of the message to be decoded
   }
   void update() {
 
-    if (el==0) {
+    if (dl==0) {
+      background(255);
       fill(250, 0, 0);
-      text("ATTENTION: THERE IS NO MESSAGE TO BE DECRYPTED! PLEASE OPEN \"decode.txt\" AND FOLLOW THE INSTRUCTIONS!", 10, 150, 980, 738);
-      outputdecoded.println(decoded);
-      outputdecoded.flush();
-      outputdecoded.close();
-      noLoop();
+      text("ATTENTION: THERE IS NO MESSAGE TO BE DECRYPTED! PLEASE OPEN \"Input/decode.txt\" AND FOLLOW THE INSTRUCTIONS!", 12, 291, 980, 738);
     } else {
-
-      for (charperframe=0; charperframe<10; charperframe++) {
-        ec=int(decode[1].charAt(charnum));
-        ec=ec+eshift;
-        completion=((charnum/el)*100);
-        fill(0);
-        rect(100, 364, (completion*8), 10);
-        println(completion);
-        if (charnum==0) {
-          decoded=((char)ec)+"";
-        } else {
-          decoded+=((char)ec);
-        }
-        charnum++; //moves to next character
-      }
-      if (charnum==el) {
+      if (charnum==dl) {
         background(255);
         println("");
         print(decoded);
         textSize(15);
         textAlign(CENTER);
-        text("Decoded text is also avaliable in line 8 of \"Output/decode.txt\"", 400, 15);
+        text("Encoded text is also avaliable in line 8 of \"Output/encode.txt\". Press \"R\" to return", 400, 15);
         textAlign(LEFT);
         fill(0);
         text(decoded, 10, 50, 980, 738);
-        outputdecoded.println(decoded);
+        outputdecoded.print(decoded);
         outputdecoded.flush();
         outputdecoded.close();
         noLoop();
+      } else {
+        for (charperframe=0; charperframe<1; charperframe++) {
+          dc=int(decode[1].charAt(charnum));//converts every character to ASCII
+          dc=dc+dshift;//shifts the ASCII code of each character in the message by eshift 
+          completion=((charnum/dl)*100);//calculates how far the throuugh the 
+          fill(0);
+          rect(100, 364, (completion*8), 10);
+          println(completion);
+          if (charnum==0) {
+            decoded=((char)dc)+"";
+          } else {
+            decoded+=((char)dc);
+          }
+          charnum=charnum+1; //moves to next character
+        }
       }
     }
   }

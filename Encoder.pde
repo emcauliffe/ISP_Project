@@ -3,7 +3,6 @@ class Encoder {
   int shift2;//encode shift two
   int eshift;//the integer for how much the numbers should shift to encode the message
   int ec;//encode character one
-  int ec2;//encode character two
   float el;//length of mesage to be encoded
   String encoded;//encoded message
   String[] encode;//encode array
@@ -24,37 +23,39 @@ class Encoder {
   void update() {
 
     if (el==0) {
+      background(255);
       fill(250, 0, 0);
-      text("ATTENTION: THERE IS NO MESSAGE TO BE ENCRYPTED! PLEASE OPEN \"encode.txt\" AND FOLLOW THE INSTRUCTIONS!", 10, 150, 980, 738);
+      text("ATTENTION: THERE IS NO MESSAGE TO BE ENCRYPTED! PLEASE OPEN \"Input/encode.txt\" AND FOLLOW THE INSTRUCTIONS!", 12, 291, 980, 738);
     } else {
-      for (charperframe=0; charperframe<1; charperframe++) {
-        ec=int(encode[1].charAt(charnum));//converts every character to ASCII
-        ec=ec+eshift;//shifts the ASCII code of each character in the message by eshift 
-        completion=((charnum/el)*100);//calculates how far the throuugh the 
+      if (charnum==el) {
+        background(255);
+        println("");
+        print(encoded);
+        textSize(15);
+        textAlign(CENTER);
+        text("Encoded text is also avaliable in line 8 of \"Output/encode.txt\". Press \"R\" to return", 400, 15);
+        textAlign(LEFT);
         fill(0);
-        rect(100, 364, (completion*8), 10);
-        println(completion);
-        if (charnum==0) {
-          encoded=((char)ec)+"";
-        } else {
-          encoded+=((char)ec);
-        }
-        if (charnum==el) {
-          background(255);
-          println("");
-          print(encoded);
-          textSize(15);
-          textAlign(CENTER);
-          text("Encoded text is also avaliable in line 8 of \"Output/encode.txt\"", 400, 15);
-          textAlign(LEFT);
+        text(encoded, 10, 50, 980, 738);
+        outputencoded.print(encoded);
+        outputencoded.flush();
+        outputencoded.close();
+        noLoop();
+      } else {
+        for (charperframe=0; charperframe<1; charperframe++) {
+          ec=int(encode[1].charAt(charnum));//converts every character to ASCII
+          ec=ec+eshift;//shifts the ASCII code of each character in the message by eshift 
+          completion=((charnum/el)*100);//calculates how far the throuugh the 
           fill(0);
-          text(encoded, 10, 50, 980, 738);
-          outputencoded.print(encoded);
-          outputencoded.flush();
-          outputencoded.close();
-          noLoop();
+          rect(100, 364, (completion*8), 10);
+          println(completion);
+          if (charnum==0) {
+            encoded=((char)ec)+"";
+          } else {
+            encoded+=((char)ec);
+          }
+          charnum=charnum+1; //moves to next character
         }
-        charnum=charnum+1; //moves to next character
       }
     }
   }
