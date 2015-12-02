@@ -2,11 +2,11 @@ Encoder e1;//encoder class
 Decoder d1;//decoder class
 int code;//0 for load screen, 1 for encode, 2 for decode
 void setup() {
-  size(1000, 748);//set canvas size
+  size(1000, 748, P2D);//set canvas size
   background(255);//background white
   e1=new Encoder();//load encoder class
   d1=new Decoder();//load decoder class
-  frameRate(299999999);//framerate set as high as possible so that the computer can encode the message as fast as possible
+  frameRate(144);//framerate set as high as possible so that the computer can encode the message as fast as possible
   code=0;//set the program to open in the launch screen
 }
 void draw() {
@@ -33,6 +33,7 @@ void draw() {
     rect(100, 364, 800, 10);//draw static box for loading bar
     noStroke();
     fill(0);
+    textSize(20);
     text("Loading...", 490, 394);//print loading on screen
     e1.update();//load encoder class
   }
@@ -44,6 +45,7 @@ void draw() {
     rect(100, 364, 800, 10);//draw static box for loading bar
     noStroke();
     fill(0);
+    textSize(20);
     text("Loading...", 490, 394);//print loading on screen
     d1.update();//load decoder class
   }
@@ -60,6 +62,9 @@ void keyPressed() {
   if (key=='r'||key=='R') {
     code=0;//send to launch screen
     loop();
+  }
+  if (key=='q'||key=='Q') {
+    exit();
   }
 }
 void mousePressed() {
