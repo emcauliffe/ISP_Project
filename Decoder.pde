@@ -4,11 +4,11 @@ class Decoder {
   int dshift;//the integer for how much the numbers should shift to decode the message
   int dc;//decode character one
   float dl;//length of mesage to be decoded
-  int charnum;//the placement number of the character in the message to be decoded
   String decoded;//decoded message
   String[] decode;//decode array
   float completion;//Percentage of the message decoded
   PrintWriter outputdecoded;//output the decoded text to decode.txt
+  int charnum;//the placement number of the character in the message to be decoded
   int divide;//number of times that charnum can be divided
   int remainder;//remainder of divided charnum
   Decoder() {

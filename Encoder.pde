@@ -23,8 +23,6 @@ class Encoder {
     noStroke();
   }
   void update() {
-    //println(divide);
-    //println(remainder);
     if (el==0) {//if there is nothing to be encoded alert the user
       background(255);
       fill(250, 0, 0);
