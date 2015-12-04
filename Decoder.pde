@@ -11,9 +11,10 @@ class Decoder {
   int charnum;//the placement number of the character in the message to be decoded
   int divide;//number of times that charnum can be divided
   int remainder;//remainder of divided charnum
+  boolean complete;//is the program complete
   Decoder() {
     decode=loadStrings("Input/decode.txt");// load the text that is to be decoded as an array;
-    outputdecoded=createWriter("Output/decode.txt");//open the file that the decrypted text will be written to 
+    outputdecoded=createWriter("Output/decoded.txt");//open the file that the decrypted text will be written to 
     shift1=(int(decode[0].charAt(0)));//convert the first character of the key to ASCII
     shift2=(int(decode[0].charAt(1)));//convert the second character of the key to ASCII
     dshift=shift1-shift2;//Calculates the shift required in the numbers to decode the text
@@ -21,29 +22,56 @@ class Decoder {
     divide=(round(dl))/100;
     remainder=(round(dl))%100;
     noStroke();
+    complete=false;
   }
   void update() {
+    background(255);
+    stroke(0);
+    fill(255);
+    rect(100, 364, 800, 10);//draw static box for loading bar
+    noStroke();
+    fill(0);
+    textSize(20);
+    text("Loading...", 490, 394);//print loading on screen
     if (dl==0) {//if there is nothing to be decoded alert the user
       background(255);
       fill(250, 0, 0);
       text("ATTENTION: THERE IS NO MESSAGE TO BE DECRYPTED! PLEASE OPEN \"Input/decode.txt\" AND FOLLOW THE INSTRUCTIONS!", 12, 291, 980, 738);
     } else {
       if (charnum==dl) {//if the program is fully decrypted, do this:
+        cursor(ARROW);
         background(255);
-        //println("");
-        //print(decoded);
-        textSize(15);
-        textAlign(CENTER);
-        text("Encoded text is also avaliable in \"Output/encode.txt\". Press \"R\" to return.", 500, 25); //tell the user where to find the text output so they can copy it to the clipboard
-        textSize(10);
-        textAlign(LEFT);
-        fill(0);
-        text(decoded, 10, 50, 980, 738);//display the decoded message on the screen
+        if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) { 
+          textSize(10);
+          textAlign(LEFT);
+          fill(0);
+          stroke(1);
+          fill(0);
+          rect(197, 8, 604, 26);
+          text(decoded, 10, 50, 980, 738);//display the decoded message on the screen
+          fill(255);
+          textSize(15);
+          textAlign(CENTER);
+          text("Encoded text is also avaliable in \"Output/Decoded.txt\". Press \"R\" or click to return.", 500, 25); //tell the user where to find the text output so they can copy it to the clipboard
+          complete=true;
+        } else {
+          textSize(10);
+          textAlign(LEFT);
+          fill(0);
+          stroke(1);
+          fill(255);
+          rect(197, 8, 604, 26);
+          fill(0);
+          text(decoded, 10, 50, 980, 738);//display the decoded message on the screen
+          textSize(15);
+          textAlign(CENTER);
+          text("Encoded text is also avaliable in \"Output/Decoded.txt\". Press \"R\" or click to return.", 500, 25); //tell the user where to find the text output so they can copy it to the clipboard
+        }
         outputdecoded.print(decoded);//print the decoded message to the output/decoded.txt file 
         outputdecoded.flush();//ensure all data needed is written to the file
         outputdecoded.close();//close the output file
-        noLoop();//end the loop
       } else {//if it is not complete, do this:
+        cursor(WAIT);
         if (remainder>0) {
           fill(255);
           rect(463, 405, 53, 46);//erase the loading percentage so that we can draw over it again
@@ -86,5 +114,8 @@ class Decoder {
         }
       }
     }
+  }
+  boolean de_complete() {
+    return complete;
   }
 }
