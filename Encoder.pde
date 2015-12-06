@@ -42,7 +42,7 @@ class Encoder {
         cursor(ARROW);
         background(255);
         if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) { 
-          textSize(10);
+          textSize(15);
           textAlign(LEFT);
           fill(0);
           stroke(1);
@@ -55,7 +55,7 @@ class Encoder {
           text("Encoded text is also avaliable in \"Output/encoded.txt\". Press \"R\" or click to return.", 500, 25); //tell the user where to find the text output so they can copy it to the clipboard
           complete=true;
         } else {
-          textSize(10);
+          textSize(15);
           textAlign(LEFT);
           fill(0);
           stroke(1);
