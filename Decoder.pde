@@ -37,6 +37,30 @@ class Decoder {
       background(255);
       fill(250, 0, 0);
       text("ATTENTION: THERE IS NO MESSAGE TO BE DECRYPTED! PLEASE OPEN \"Input/decode.txt\" AND FOLLOW THE INSTRUCTIONS!", 12, 291, 980, 738);
+      if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) { 
+        textSize(15);
+        textAlign(LEFT);
+        fill(0);
+        stroke(1);
+        fill(0);
+        rect(392, 8, 213, 26);
+        fill(255);
+        textSize(15);
+        textAlign(CENTER);
+        text("Press \"R\" or click to return.", 500, 25); //tell the user where to find the text output so they can copy it to the clipboard
+        complete=true;
+      } else {
+        textSize(15);
+        textAlign(LEFT);
+        fill(0);
+        stroke(1);
+        fill(255);
+        rect(392, 8, 213, 26);
+        fill(0);
+        textSize(15);
+        textAlign(CENTER);
+        text("Press \"R\" or click to return.", 500, 25); //tell the user where to find the text output so they can copy it to the clipboard
+      }
     } else {
       if (charnum==dl) {//if the program is fully decrypted, do this:
         cursor(ARROW);
@@ -115,7 +139,7 @@ class Decoder {
       }
     }
   }
-  boolean de_complete() {
+  boolean de_complete() {//returns if the decryption is done
     return complete;
   }
 }
