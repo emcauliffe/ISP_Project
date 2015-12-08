@@ -2,6 +2,8 @@ Encoder e1;//encoder class
 Decoder d1;//decoder class
 Launch l1;//launch screen class
 Help h1;//help class
+Key k1;//key_pressed class
+Mouse m1;//mouse_pressed class
 int code;//0 for load screen, 1 for encode, 2 for decode, 3 for help
 void setup() {
   size(1000, 748, P2D);//set canvas size
@@ -10,6 +12,8 @@ void setup() {
   d1=new Decoder();//load decoder class
   l1=new Launch();//load launch class
   h1=new Help();//load help class
+  k1=new Key();//load key_pressed class
+  m1=new Mouse();//load mouse_pressed class
   frameRate(144);//framerate set for 144hz monitor capability
   code=0;//set the program to open in the launch screen
 }
@@ -26,57 +30,14 @@ void draw() {
   if (code==2) {
     d1.update();//load decoder class
   }
+  //help
   if (code==3) {
     h1.update();//load help class
   }
 }
 void keyPressed() {
-  if (code==0) {
-    if (key=='e'||key=='E') {
-      code=1;//send to encode
-    }
-    if (key=='d'||key=='D') {
-      code=2;//send to decode
-    }
-    if (key=='h'||key=='H') {
-      code=3;//send to help screen
-    }
-  }
-  if (key=='r'||key=='R') {
-    code=0;//send to launch screen
-  }
-  if (key=='q'||key=='Q') {
-    exit();//quit
-  }
+k1.update();//load key_pressed class
 }
 void mousePressed() {
-  if (code==0) {
-    if (mouseX>25 && mouseX<481 && mouseY>512 && mouseY<542) {//encode button
-      code=1;//set to encode
-    }
-    if (mouseX>521 && mouseX<977 && mouseY>512 && mouseY<542) {//decode button
-      code=2;//set to decode
-    }
-    if (mouseX>940 && mouseX<994 && mouseY>718 && mouseY<743) {//help button
-      code=3;//set to help
-    }
-    if (mouseX>10 && mouseX<60 && mouseY>717 && mouseY<742) {//quit button
-      exit();
-    }
-  }
-  if (d1.de_complete()==true) {
-    if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) {//return from decode button
-      code=0;//set to launch screen
-    }
-  }
-  if (e1.en_complete()==true) {
-    if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) {//return from decode button
-      code=0;//set to launch screen
-    }
-  }
-  if (code==3) {
-    if (mouseX>466 && mouseX<535 && mouseY>717 && mouseY<742) {//return from help button
-      code=0;//set to launch screen
-    }
-  }
+  m1.update();//load mouse_pressed class
 }
