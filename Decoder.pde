@@ -19,8 +19,8 @@ class Decoder {
     shift2=(int(decode[0].charAt(1)));//convert the second character of the key to ASCII
     dshift=shift1-shift2;//Calculates the shift required in the numbers to decode the text
     dl=decode[1].length();//calculates the length of the message to be decoded
-    divide=(round(dl))/100;
-    remainder=(round(dl))%100;
+    divide=(round(dl))/100;//divide the number of characters by 100
+    remainder=(round(dl))%100;//find the remainder of the division above
     noStroke();
     complete=false;
   }
@@ -37,7 +37,7 @@ class Decoder {
       background(255);
       fill(250, 0, 0);
       text("ATTENTION: THERE IS NO MESSAGE TO BE DECRYPTED! PLEASE OPEN \"Input/decode.txt\" AND FOLLOW THE INSTRUCTIONS!", 12, 291, 980, 738);
-      if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) { 
+      if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) { //if mouse is in box, invert colours of box
         textSize(15);
         textAlign(LEFT);
         fill(0);
@@ -49,7 +49,7 @@ class Decoder {
         textAlign(CENTER);
         text("Press \"R\" or click to return.", 500, 25); //tell the user where to find the text output so they can copy it to the clipboard
         complete=true;
-      } else {
+      } else {//otherwise make box white with black text
         textSize(15);
         textAlign(LEFT);
         fill(0);
@@ -65,7 +65,7 @@ class Decoder {
       if (charnum==dl) {//if the program is fully decrypted, do this:
         cursor(ARROW);
         background(255);
-        if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) { 
+        if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) {  //if mouse is in box, invert colours of box
           textSize(15);
           textAlign(LEFT);
           fill(0);
@@ -78,7 +78,7 @@ class Decoder {
           textAlign(CENTER);
           text("Encoded text is also avaliable in \"Output/Decoded.txt\". Press \"R\" or click to return.", 500, 25); //tell the user where to find the text output so they can copy it to the clipboard
           complete=true;
-        } else {
+        } else {//otherwise make box white with black text
           textSize(15);
           textAlign(LEFT);
           fill(0);
@@ -96,7 +96,7 @@ class Decoder {
         outputdecoded.close();//close the output file
       } else {//if it is not complete, do this:
         cursor(WAIT);
-        if (remainder>0) {
+        if (remainder>0) {//decode one character per screen refresh until there is no more characters left in the remainder
           fill(255);
           rect(463, 405, 53, 46);//erase the loading percentage so that we can draw over it again
           dc=int(decode[1].charAt(charnum));//converts every character to ASCII
@@ -111,11 +111,11 @@ class Decoder {
           if (charnum==0) {
             decoded=((char)dc)+"";//print nothing instead of "null" character on the first operation
           } else {
-            decoded+=((char)dc);
+            decoded+=((char)dc);//otherwise print the char
           }
           charnum++; //moves to next character
           remainder--;
-        } else {
+        } else {//decode 100 characters per screen refresh when 100 goes evenly into the number of digits left to decode
           for (int i = 0; i<100; i++) {
             fill(255);
             rect(463, 405, 53, 46);//erase the loading percentage so that we can draw over it again
@@ -131,7 +131,7 @@ class Decoder {
             if (charnum==0) {
               decoded=((char)dc)+"";//print nothing instead of "null" character on the first operation
             } else {
-              decoded+=((char)dc);
+              decoded+=((char)dc);//otherwise print the char
             }
             charnum++; //moves to next character
           }

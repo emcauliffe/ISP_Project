@@ -36,7 +36,7 @@ void draw() {
   }
 }
 void keyPressed() {
-k1.update();//load key_pressed class
+  k1.update();//load key_pressed class
 }
 void mousePressed() {
   m1.update();//load mouse_pressed class

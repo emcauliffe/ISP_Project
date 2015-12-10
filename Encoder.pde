@@ -19,8 +19,8 @@ class Encoder {
     shift2=(int(encode[0].charAt(1)));//convert the second character in the key to ASCII
     eshift=shift2-shift1;//Subtracts the ASCII of the first number from the second number. This calculates the shift required in the cypher
     el=encode[1].length();//calculates the length of the message to be encoded
-    divide=(round(el))/100;
-    remainder=(round(el))%100;
+    divide=(round(el))/100;//divide the number of characters by 100
+    remainder=(round(el))%100;//find the remainder of the division above
     noStroke();
     complete=false;
   }
@@ -37,7 +37,7 @@ class Encoder {
       background(255);
       fill(250, 0, 0);
       text("ATTENTION: THERE IS NO MESSAGE TO BE ENCRYPTED! PLEASE OPEN \"Input/encode.txt\" AND FOLLOW THE INSTRUCTIONS!", 12, 291, 980, 738);
-      if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) { 
+      if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) {  //if mouse is in box, invert colours of box
         textSize(15);
         textAlign(LEFT);
         fill(0);
@@ -65,7 +65,7 @@ class Encoder {
       if (charnum==el) {//if the program is fully encrypted, do this:
         cursor(ARROW);
         background(255);
-        if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) { 
+        if (mouseX>197 && mouseX<801 && mouseY>8 && mouseY<34) {  //if mouse is in box, invert colours of box
           textSize(15);
           textAlign(LEFT);
           fill(0);
@@ -78,7 +78,7 @@ class Encoder {
           textAlign(CENTER);
           text("Encoded text is also avaliable in \"Output/encoded.txt\". Press \"R\" or click to return.", 500, 25); //tell the user where to find the text output so they can copy it to the clipboard
           complete=true;
-        } else {
+        } else {//otherwise make box white with black text
           textSize(15);
           textAlign(LEFT);
           fill(0);
@@ -96,7 +96,7 @@ class Encoder {
         outputencoded.close();
       } else {//if it is not complete, do this:
         cursor(WAIT);
-        if (remainder>0) {
+        if (remainder>0) {//decode one character per screen refresh until there is no more characters left in the remainder
           fill(255);
           rect(463, 405, 53, 46);//erase the loading percentage so that we can draw over it again
           ec=int(encode[1].charAt(charnum));//converts every character to ASCII
@@ -111,11 +111,11 @@ class Encoder {
           if (charnum==0) {
             encoded=((char)ec)+"";//print nothing instead of "null" character on the first operation
           } else {
-            encoded+=((char)ec);
+            encoded+=((char)ec);//otherwise print the char
           }
           charnum++; //moves to next character
           remainder--;
-        } else {
+        } else {//decode 100 characters per screen refresh when 100 goes evenly into the number of digits left to decode
           for (int i = 0; i<100; i++) {
             fill(255);
             rect(463, 405, 53, 46);//erase the loading percentage so that we can draw over it again
@@ -131,7 +131,7 @@ class Encoder {
             if (charnum==0) {
               encoded=((char)ec)+"";//print nothing instead of "null" character on the first operation
             } else {
-              encoded+=((char)ec);
+              encoded+=((char)ec);//otherwise print the char
             }
             charnum++; //moves to next character
           }
