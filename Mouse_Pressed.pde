@@ -30,6 +30,9 @@ class Mouse {
       if (mouseX>466 && mouseX<535 && mouseY>717 && mouseY<742) {//return from help button
         code=0;//set to launch screen
       }
+      if (mouseX>46 && mouseX<458 && mouseY>199 && mouseY<232) {
+        link("http://practicalcryptography.com/ciphers/caesar-cipher/");
+      }
     }
   }
 }
